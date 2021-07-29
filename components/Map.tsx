@@ -7,8 +7,7 @@ import {
   TileLayer,
   ImageOverlay,
   Marker,
-  Popup,
-  useMapEvents
+  Popup
 } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
