@@ -65,14 +65,16 @@ const MapStyles = styled.div`
   }
 
   .wizard-image {
-      scroll-snap-align: start;
-      position: relative;
-      margin: auto;
+      scroll-snap-align: end;
+      position: absolute;
+      margin-top: 20px;
+      margin-left: 12px;
   }
 
   .wizard-image-div {
       height: 200px;
       width: 200px;
+      position: relative;
   }
 
   @font-face {
@@ -80,17 +82,27 @@ const MapStyles = styled.div`
       src: url("/static/game/wizards/alagard.otf") format("opentype");
     }
 
-  .wizard-name {
-      margin: auto;
-      width: 9.5em;
-      margin-top: -5%;
-      margin-left: 13.9%;
-      text-align: center;
+  .name-div {
+      width: 143px;
+      height: 33px;
       position: absolute;
+      left: 50px;
+      top: 2px;
+  }
+
+  .wizard-name {
+      text-align: center;
+      position: relative;
       z-index: 1;
+      margin-top: 0.1em;
+      margin-left: 0.6em;
+      margin-right: 0.6em;
+      line-height: 16px;
+
       
       color: #dfd1a8;
       font-family: "Alagard";
+      font-size: 13px;
   }
 `;
 
@@ -99,7 +111,7 @@ const image_base_url = 'https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wiz
 const opensea_base_url = 'https://opensea.io/assets/0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42/';
 
 function updateName(location: any) {
-    const thisIndex = Math.floor(document.getElementsByClassName('leaflet-popup-content')[0].scrollTop / 204);
+    const thisIndex = Math.floor((document.getElementsByClassName('leaflet-popup-content')[0].scrollTop + 5) / 200);
     const nameTag = document.getElementsByClassName('wizard-name')[0] as HTMLElement;
 
     nameTag.innerText = locationJson[location].wizards[thisIndex].name;
@@ -111,7 +123,7 @@ function LocationMarker(props: any) {
             <Marker key={props.index} position={[locationJson[props.item].lat, locationJson[props.item].lng]} title={`${props.item}`} >
                   <Popup maxHeight={200} maxWidth={200}>
                   <div onMouseOver={() => updateName(props.item)}>
-                        <h3 className='wizard-name'>{locationJson[props.item].wizards[0].name}</h3>
+                        <div className='name-div'><h3 className='wizard-name'>{locationJson[props.item].wizards[0].name}</h3></div>
                         {locationJson[props.item].wizards.map((wizard: any, index: any) =>
                           <div className='wizard-image-div'>
                           <a href={opensea_base_url + wizard.id}>
