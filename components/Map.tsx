@@ -13,13 +13,13 @@ import {
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import { LatLngBounds } from "leaflet";
+import * as L from "leaflet";
 
 const width = 20;
 const height = 16;
 const scale = 1;
 
-const bounds = new LatLngBounds(
+const bounds = new L.LatLngBounds(
   [(-height / 2) * scale, (-width / 2) * scale],
   [(height / 2) * scale, (width / 2) * scale]
 );
@@ -30,13 +30,13 @@ const MapStyles = styled.div`
     image-rendering: pixelated;
   }
 
-  .leaflet-popup-content-wrapper {
-        background-image: url("static/img/frame.png");
-        background-size: 241px 228px;
+  .leaflet-popup-content {
+      width: 361.5px;
+      scroll-snap-type: y mandatory;
   }
 
-  .leaflet-popup-content {
-      scroll-snap-type: y mandatory;
+  .leaflet-popup-content-wrapper {
+      background: #030d04;
   }
 
   .leaflet-popup-scrolled {
@@ -64,17 +64,23 @@ const MapStyles = styled.div`
       opacity: 0;
   }
 
-  .wizard-image {
-      scroll-snap-align: end;
-      position: absolute;
-      margin-top: 20px;
-      margin-left: 12px;
+  .leaflet-popup-close-button {
+      display: none;
   }
 
   .wizard-image-div {
-      height: 200px;
-      width: 200px;
+      height: 171px;
+      width: 180.75px;
       position: relative;
+      background-image: url("static/img/frame.png");
+      background-size: 180.75px 171px;
+      display: inline-block;
+      scroll-snap-align: end;
+  }
+
+  .wizard-image {
+      margin-left: 11%;
+      margin-top: 17%;
   }
 
   @font-face {
@@ -83,11 +89,11 @@ const MapStyles = styled.div`
     }
 
   .name-div {
-      width: 143px;
-      height: 33px;
+      width: 107.25px;
+      height: 24.75px;
       position: absolute;
-      left: 50px;
-      top: 2px;
+      left: 37.5px;
+      top: 1.5px;
   }
 
   .wizard-name {
@@ -95,14 +101,14 @@ const MapStyles = styled.div`
       position: relative;
       z-index: 1;
       margin-top: 0.1em;
-      margin-left: 0.6em;
-      margin-right: 0.6em;
-      line-height: 16px;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      line-height: 1em;
 
       
       color: #dfd1a8;
       font-family: "Alagard";
-      font-size: 13px;
+      font-size: 1em;
   }
 `;
 
@@ -110,26 +116,30 @@ const locationJson = require('../data/locationMapping.json');
 const image_base_url = 'https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wizard-';
 const opensea_base_url = 'https://opensea.io/assets/0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42/';
 
-function updateName(location: any) {
-    const thisIndex = Math.floor((document.getElementsByClassName('leaflet-popup-content')[0].scrollTop + 5) / 200);
-    const nameTag = document.getElementsByClassName('wizard-name')[0] as HTMLElement;
+const newicon : any = L.icon({
+  iconUrl: require("../public/static/img/mapMarker.png"),
+  iconSize: [24, 37.5]
+});
 
-    nameTag.innerText = locationJson[location].wizards[thisIndex].name;
+function WizardCard(props: any) {
+    return (
+        <div className='wizard-image-div'>
+            <div className='name-div'><h3 className='wizard-name'>{props.name}</h3></div>
+            <a href={opensea_base_url + props.token_id}>
+                <img className='wizard-image' src={image_base_url + props.token_id + '.png'} height={131.25} width={131.25}/>
+            </a>
+        </div>
+    )
 }
 
 function LocationMarker(props: any) {
     if ('lat' in locationJson[props.item]) {
         return (
-            <Marker key={props.index} position={[locationJson[props.item].lat, locationJson[props.item].lng]} title={`${props.item}`} >
-                  <Popup maxHeight={200} maxWidth={200}>
-                  <div onMouseOver={() => updateName(props.item)}>
-                        <div className='name-div'><h3 className='wizard-name'>{locationJson[props.item].wizards[0].name}</h3></div>
+            <Marker key={props.index} position={[locationJson[props.item].lat, locationJson[props.item].lng]} title={`${props.item}`} icon={newicon} >
+                  <Popup maxHeight={342} maxWidth={361.5}>
+                  <div>
                         {locationJson[props.item].wizards.map((wizard: any, index: any) =>
-                          <div className='wizard-image-div'>
-                          <a href={opensea_base_url + wizard.id}>
-                              <img className='wizard-image' src={image_base_url + wizard.id + '.png'} height={175} width={175}/>
-                          </a>
-                          </div>
+                          <WizardCard token_id={wizard.id} name={wizard.name}/>
                         )}
                    </div>
                   </Popup>
