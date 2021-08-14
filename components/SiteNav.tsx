@@ -17,6 +17,11 @@ const SiteNavElement = styled.nav`
     margin-top: 0;
     margin-left: 0;
     width: 100%;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
   }
 
   ul.menu {
@@ -156,12 +161,12 @@ export default function SiteNav({}: Props) {
             href="https://opensea.io/collection/forgottenruneswizardscult"
             className="icon-link"
           >
-            <ResponsivePixelImg src="/static/img/icons/social_opensea_default.png" />
+            <ResponsivePixelImg src="/static/img/icons/social_opensea_default_w.png" />
           </a>
         </li>
         <li className="item">
           <a href="https://twitter.com/forgottenrunes" className="icon-link">
-            <ResponsivePixelImg src="/static/img/icons/social_twitter_default.png" />
+            <ResponsivePixelImg src="/static/img/icons/social_twitter_default_w.png" />
           </a>
         </li>
         <li className="item">
@@ -169,12 +174,12 @@ export default function SiteNav({}: Props) {
             href="https://www.instagram.com/forgotten_runes/"
             className="icon-link"
           >
-            <ResponsivePixelImg src="/static/img/icons/social_ig_default.png" />
+            <ResponsivePixelImg src="/static/img/icons/social_ig_default_w.png" />
           </a>
         </li>
         <li className="item">
           <a href="https://discord.gg/forgottenrunes" className="icon-link">
-            <ResponsivePixelImg src="/static/img/icons/social_discord_default.png" />
+            <ResponsivePixelImg src="/static/img/icons/social_discord_default_w.png" />
           </a>
         </li>
 
