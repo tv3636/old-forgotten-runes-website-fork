@@ -12,11 +12,27 @@ const WizardStyle = styled.div`
       background-size: 180.75px 171px;
       display: inline-block;
       scroll-snap-align: end;
+      margin: 0.3%;
   }
 
   .wizard-image {
       margin-left: 11%;
       margin-top: 17%;
+  }
+
+  .outer-div {
+      background-color: #000000;
+      top: 0.8em;
+      max-width: 55.2%;
+      position: relative;
+
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
   }
 
   @font-face {
@@ -43,7 +59,7 @@ const WizardStyle = styled.div`
 
       color: #dfd1a8;
       font-family: "Alagard";
-      font-size: 1em;
+      font-size: 69%;
   }
 `;
 
@@ -61,7 +77,7 @@ function WizardCard(props: any) {
 function WizardDiv(props: any) {
     return (
         <WizardStyle>
-            <div>
+            <div className='outer-div'>
                 {props.wizards.map((wizard: any) =>
                     <WizardCard id={wizard.id} name={wizard.name}/>
                 )}
