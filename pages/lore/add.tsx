@@ -305,7 +305,7 @@ const AddLorePage = () => {
               <h1>Add Lore</h1>
               <FormField>
                 <h2>Pick a Wizard</h2>
-                <WizardPicker onWizardPicked={onWizardPicked} />
+                <WizardPicker onWizardPicked={onWizardPicked} useModal={true} />
               </FormField>
               <FormField>
                 <h2>

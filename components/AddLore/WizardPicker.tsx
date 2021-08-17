@@ -86,9 +86,7 @@ function WizardPickerModal({ onRequestClose, onWizardPicked, injectedProvider }:
   );
 }
 
-type Props = {
-  onWizardPicked: (WizardConfiguration: WizardConfiguration) => void;
-};
+
 
 const WizardPickerElement = styled.div`
   margin-left: auto;
@@ -107,7 +105,12 @@ export type WizardConfiguration = {
   name: string;
 };
 
-const WizardPicker = observer(({}: Props) => {
+type Props = {
+  onWizardPicked: (WizardConfiguration: WizardConfiguration) => void;
+  useModal: boolean;
+};
+
+const WizardPicker = observer((props: Props) => {
   const { web3Settings } = useMst();
   const walletConnected = web3Settings.connected;
 
@@ -133,30 +136,34 @@ const WizardPicker = observer(({}: Props) => {
   function wizardPicked(tokenId: string, name: string) {
     onWizardModalPicked({tokenId, name});
   }
-
-  return (
-    <WizardPickerElement>
-      <EmptyWell solid={currentWizard ? true : false}>
-        {currentWizard && (
-          <WizardCard
-            id={currentWizard.tokenId}
-            name={currentWizard.name}
-          />
-        )}
-
-          <Button onClick={() => setModalIsOpen(!modalIsOpen)}>
-            Pick {currentWizard ? "another" : "a"} Wizard
-          </Button>
-          <StyledModal isOpen={modalIsOpen} onRequestClose={closeModal}>
-            <WizardPickerModal
-              onRequestClose={closeModal}
-              onWizardPicked={wizardPicked}
-              injectedProvider={web3Settings.injectedProvider}
+  if (props.useModal) {
+    return (
+      <WizardPickerElement>
+        <EmptyWell solid={currentWizard ? true : false}>
+          {currentWizard && (
+            <WizardCard
+              id={currentWizard.tokenId}
+              name={currentWizard.name}
             />
-          </StyledModal>
-      </EmptyWell>
-    </WizardPickerElement>
-  );
+          )}
+
+            <Button onClick={() => setModalIsOpen(!modalIsOpen)}>
+              Pick {currentWizard ? "another" : "a"} Wizard
+            </Button>
+            <StyledModal isOpen={modalIsOpen} onRequestClose={closeModal}>
+              <WizardPickerModal
+                onRequestClose={closeModal}
+                onWizardPicked={wizardPicked}
+                injectedProvider={web3Settings.injectedProvider}
+              />
+            </StyledModal>
+        </EmptyWell>
+      </WizardPickerElement>
+    );
+  } 
+  else {
+    return <WizardList injectedProvider={web3Settings.injectedProvider} />
+  }
 });
 
 export default WizardPicker;

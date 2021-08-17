@@ -16,9 +16,12 @@ const CardStyle = styled.div<{ isHovering: boolean }>`
     position: relative;
     background-image: url("../static/img/frame-alt.png");
     background-size: 180.75px 171px;
-    display: inline-block;
-    scroll-snap-align: end;
     margin: 0.45%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: center;
   }
 
   .wizard-image {
