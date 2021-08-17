@@ -34,6 +34,7 @@ const ParchmentBackground = styled.div<{ bgColor: string | null }>`
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) => props.bgColor || "transparent"};
+  
   ::before {
     content: "";
     background-image: url("/static/lore/book/paperTxt01.png");
