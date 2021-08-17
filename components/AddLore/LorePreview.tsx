@@ -10,7 +10,7 @@ type Props = {
   currentArtifact: ArtifactConfiguration | null;
   currentStory: string | null;
   currentTitle: string | null;
-  currentBgColor?: string | null | undefined;
+  currentBgColor?: string | null;
 };
 
 const LorePreviewElement = styled.div`
@@ -25,7 +25,7 @@ const EmptyPreviewStyles = styled.div`
   padding: 1em 2em;
 `;
 
-const ParchmentBackground = styled.div<{ bgColor: string | null | undefined }>`
+const ParchmentBackground = styled.div<{ bgColor: string | null }>`
   font-family: "Alagard";
   word-break: break-word;
   color: #acacac;
@@ -34,7 +34,6 @@ const ParchmentBackground = styled.div<{ bgColor: string | null | undefined }>`
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) => props.bgColor || "transparent"};
-
   ::before {
     content: "";
     background-image: url("/static/lore/book/paperTxt01.png");
@@ -115,7 +114,7 @@ export default function LorePreview({
 
   return (
     <LorePreviewElement>
-      <ParchmentPage bgColor={'blue'}>
+      <ParchmentPage bgColor={currentBgColor}>
         <LorePreviewLayout>
           {!hasContent && (
             <EmptyPreviewStyles>
