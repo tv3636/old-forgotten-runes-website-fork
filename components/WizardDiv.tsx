@@ -5,7 +5,6 @@ const image_base_url = 'https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wiz
 const opensea_base_url = 'https://opensea.io/assets/0x521f9c7505005cfa19a8e5786a9c3c9c9f5e6f42/';
 
 const WizardStyle = styled.div`
-
   .outer-div {
       top: 1.8em;
       position: relative;

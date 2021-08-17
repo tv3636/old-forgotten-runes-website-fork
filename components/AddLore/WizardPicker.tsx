@@ -86,7 +86,10 @@ function WizardPickerModal({ onRequestClose, onWizardPicked, injectedProvider }:
   );
 }
 
-
+type Props = {
+  onWizardPicked: (WizardConfiguration: WizardConfiguration) => void;
+  useModal: boolean;
+};
 
 const WizardPickerElement = styled.div`
   margin-left: auto;
@@ -103,11 +106,6 @@ const WizardPickerElement = styled.div`
 export type WizardConfiguration = {
   tokenId: string;
   name: string;
-};
-
-type Props = {
-  onWizardPicked: (WizardConfiguration: WizardConfiguration) => void;
-  useModal: boolean;
 };
 
 const WizardPicker = observer((props: Props) => {
