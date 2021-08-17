@@ -1,9 +1,5 @@
 import Layout from "../components/Layout";
-import ReactMarkdown from "react-markdown";
-import { useState } from "react";
-import gfm from "remark-gfm";
 import styled from "@emotion/styled";
-import dynamic from "next/dynamic";
 import WizardPicker, {WizardConfiguration} from "../components/AddLore/WizardPicker"
 
 const PickerStyle = styled.div`
@@ -29,7 +25,6 @@ const PickerStyle = styled.div`
   	text-align: center;
   }
 `;
-
 
 const onWizardPicked = (wizardConfiguration: WizardConfiguration) => {
    console.log(wizardConfiguration);
