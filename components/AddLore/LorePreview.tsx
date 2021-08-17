@@ -10,7 +10,7 @@ type Props = {
   currentArtifact: ArtifactConfiguration | null;
   currentStory: string | null;
   currentTitle: string | null;
-  currentBgColor?: string | null;
+  currentBgColor?: string | null | undefined;
 };
 
 const LorePreviewElement = styled.div`
@@ -25,7 +25,7 @@ const EmptyPreviewStyles = styled.div`
   padding: 1em 2em;
 `;
 
-const ParchmentBackground = styled.div<{ bgColor: string | null }>`
+const ParchmentBackground = styled.div<{ bgColor: string | null | undefined }>`
   font-family: "Alagard";
   word-break: break-word;
   color: #acacac;
@@ -115,7 +115,7 @@ export default function LorePreview({
 
   return (
     <LorePreviewElement>
-      <ParchmentPage bgColor={currentBgColor}>
+      <ParchmentPage bgColor={'blue'}>
         <LorePreviewLayout>
           {!hasContent && (
             <EmptyPreviewStyles>

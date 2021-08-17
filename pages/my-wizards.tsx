@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import WizardPicker, {WizardConfiguration} from "../components/AddLore/WizardPicker"
 
 const PickerStyle = styled.div`
-  .wrapper {
   	height: 100%;
   	width: 100%;
   	background-color: #0e0e0e;
@@ -13,17 +12,20 @@ const PickerStyle = styled.div`
   	flex-wrap: nowrap;
   	align-content: center;
   	overflow: auto;
-  }
+`;
 
-  .outer-div {
-  	max-width: 60%;
-  	margin-bottom: 7em;
-  }
-
-  .header {
+const WizardHeader = styled.header`
   	color: #ffff;
   	text-align: center;
-  }
+  	font-family: "Alagard";
+
+  	margin: 1em;
+  	font-size: 2em;
+`;
+
+const WizardView = styled.div`
+	margin-left: 25%;
+	margin-right: 25%;
 `;
 
 const onWizardPicked = (wizardConfiguration: WizardConfiguration) => {
@@ -33,7 +35,10 @@ const onWizardPicked = (wizardConfiguration: WizardConfiguration) => {
 const MyWizards = () => (
   <Layout title="A Wizard Viewer for Forgotten Runes | Forgotten Runes Wizard's Cult: 10,000 on-chain Wizard NFTs">
     <PickerStyle>
-      <div className="wrapper"><h2 className="header">My Wizards</h2><WizardPicker onWizardPicked={onWizardPicked} useModal={false}/></div>
+		<WizardHeader>My Wizards</WizardHeader>
+		<WizardView>
+			<WizardPicker onWizardPicked={onWizardPicked} useModal={false}/>
+		</WizardView>
     </PickerStyle>
   </Layout>
 );
