@@ -87,13 +87,13 @@ const MapStyles = styled.div`
     border: none;
 
   }
+`;
 
-  .wrapper {
+const WizardWrapper = styled.div`
     max-width: 50%;
     display: inline-block;
     margin-bottom: -5%;
     font-size: 0.8em;
-  }
 `;
 
 const locationJson = require('../data/locationMapping.json');
@@ -108,9 +108,9 @@ function LocationMarker(props: any) {
             <Marker key={props.index} position={[locationJson[props.item].lat, locationJson[props.item].lng]} title={`${props.item}`} icon={newicon} >
                   <Popup maxHeight={382} maxWidth={361.5}>
                     {locationJson[props.item].wizards.map((wizard: any) =>
-                      <div className='wrapper'>
+                      <WizardWrapper>
                         <WizardCard id={wizard.id} name={wizard.name} />
-                      </div>
+                      </WizardWrapper>
                     )}
                   </Popup>
             </Marker>
