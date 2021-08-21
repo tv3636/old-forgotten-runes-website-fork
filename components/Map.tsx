@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import WizardDiv from "../components/WizardDiv";
+import WizardCard from "../components/WizardCard";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
 import styled from "@emotion/styled";
@@ -35,8 +35,9 @@ const MapStyles = styled.div`
   }
 
   .leaflet-popup-content {
+      height: 382px;
       width: 361.5px;
-      scroll-snap-type: y mandatory;
+      overflow: scroll;
   }
 
   .leaflet-popup-content-wrapper {
@@ -86,6 +87,13 @@ const MapStyles = styled.div`
     border: none;
 
   }
+
+  .wrapper {
+    max-width: 50%;
+    display: inline-block;
+    margin-bottom: -5%;
+    font-size: 0.8em;
+  }
 `;
 
 const locationJson = require('../data/locationMapping.json');
@@ -98,8 +106,12 @@ function LocationMarker(props: any) {
     if ('lat' in locationJson[props.item]) {
         return (
             <Marker key={props.index} position={[locationJson[props.item].lat, locationJson[props.item].lng]} title={`${props.item}`} icon={newicon} >
-                  <Popup maxHeight={342} maxWidth={361.5}>
-                      <WizardDiv wizards={locationJson[props.item].wizards}/>
+                  <Popup maxHeight={382} maxWidth={361.5}>
+                    {locationJson[props.item].wizards.map((wizard: any) =>
+                      <div className='wrapper'>
+                        <WizardCard id={wizard.id} name={wizard.name} />
+                      </div>
+                    )}
                   </Popup>
             </Marker>
         )
