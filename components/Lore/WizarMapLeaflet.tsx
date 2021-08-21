@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { GeoJsonObject } from "geojson";
 import { MapWrapper } from "../Map";
 import { Box } from "rebass";
-import WizardCardNoBorder from "../WizardCardNoBorder";
+import WizardCard from "../WizardCard";
 
 const wizData = productionWizardData as { [wizardId: string]: any };
 
@@ -63,8 +63,8 @@ const WizardPopup = ({
 }) => {
   return (
     <Box width={250} style={{ fontSize: 12 }}>
-      <WizardCardNoBorder
-        id={index}
+      <WizardCard
+        id={index.toString()}
         name={name}
         showOpenSeaLink={true}
         showLoreLink={true}

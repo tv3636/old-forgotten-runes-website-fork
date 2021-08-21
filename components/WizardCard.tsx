@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { Box } from "rebass";
 import { WizardConfiguration } from "./AddLore/WizardPicker";
+import { ResponsivePixelImg } from "./ResponsivePixelImg";
 
 const image_base_url =
   "https://nftz.forgottenrunes.com/wizards/alt/400-nobg/wizard-";
@@ -67,14 +69,24 @@ const WizardName = styled.div`
   }
 `;
 
+const Links = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const WizardCard = ({
   id,
   name,
-  onWizardPicked
+  onWizardPicked,
+  showOpenSeaLink = false,
+  showLoreLink = false,
 }: {
   id: string;
   name: string;
   onWizardPicked?: (wizardConfiguration: WizardConfiguration) => void;
+  showOpenSeaLink?: boolean;
+  showLoreLink?: boolean;
 }) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -107,6 +119,33 @@ const WizardCard = ({
           <WizardImage src={image_base_url + id + ".png"} />
         </WizardImageContainer>
       </WizardFrame>
+      <Links>
+        {showOpenSeaLink ? (
+              <>
+                <a
+                  href={`${opensea_base_url}${id}`}
+                  target={"_blank"}
+                  className="icon-link"
+                  title={"OpenSea"}
+                >
+                  <ResponsivePixelImg src="/static/img/icons/social_opensea_default_w.png" />
+                </a>
+              </>
+            ) : null}
+            <Box ml={3} />
+            {showLoreLink ? (
+              <>
+                <a
+                  href={`/lore/${id}/0`}
+                  className="icon-link"
+                  title={"Lore"}
+                  target={"_blank"}
+                >
+                  <ResponsivePixelImg src="/static/img/icons/social_link_default.png" />
+                </a>
+              </>
+            ) : null}
+        </Links>
     </CardStyle>
   );
 };
